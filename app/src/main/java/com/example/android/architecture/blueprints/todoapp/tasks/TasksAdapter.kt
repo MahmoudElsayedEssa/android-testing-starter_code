@@ -27,6 +27,7 @@ import com.example.android.architecture.blueprints.todoapp.tasks.TasksAdapter.Vi
 /**
  * Adapter for the task list. Has a reference to the [TasksViewModel] to send actions back to it.
  */
+
 class TasksAdapter(private val viewModel: TasksViewModel) :
     ListAdapter<Task, ViewHolder>(TaskDiffCallback()) {
 
@@ -40,7 +41,7 @@ class TasksAdapter(private val viewModel: TasksViewModel) :
         return ViewHolder.from(parent)
     }
 
-    class ViewHolder private constructor(val binding: TaskItemBinding) :
+    class ViewHolder private constructor(private val binding: TaskItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(viewModel: TasksViewModel, item: Task) {

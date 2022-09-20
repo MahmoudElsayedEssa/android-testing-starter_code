@@ -42,7 +42,7 @@ object TasksRemoteDataSource : TasksDataSource {
     private val observableTasks = MutableLiveData<Result<List<Task>>>()
 
     override suspend fun refreshTasks() {
-        observableTasks.value = getTasks()
+        observableTasks.value = getTasks()!!
     }
 
     override suspend fun refreshTask(taskId: String) {
@@ -59,7 +59,7 @@ object TasksRemoteDataSource : TasksDataSource {
                 is Result.Loading -> Result.Loading
                 is Error -> Error(tasks.exception)
                 is Success -> {
-                    val task = tasks.data.firstOrNull() { it.id == taskId }
+                    val task = tasks.data.firstOrNull { it.id == taskId }
                         ?: return@map Error(Exception("Not found"))
                     Success(task)
                 }
